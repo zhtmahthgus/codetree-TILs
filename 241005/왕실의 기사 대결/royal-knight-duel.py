@@ -75,7 +75,8 @@ answer = 0
 for _ in range(Q):
     I, J = map(int, input().split())
     #명령 수행
-    move_knight(I, J)
+    if(I in alive_list):
+        move_knight(I, J)
 
 for item in alive_list:
     answer += knight_list[item-1].k - knight_list[item-1].cur
