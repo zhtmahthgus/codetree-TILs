@@ -17,7 +17,7 @@ def check_move_s(x, y):
 def check_move_w(x, y):
     if (x-2 < 0 or y+2>=R):
         return False
-    elif (forest[x-1][y] == 0 and forest[x-2][y] == 0 and forest[x-1][y+1] == 0
+    elif (forest[x-1][y-1] == 0 and forest[x-2][y] == 0 and forest[x-1][y+1] == 0
     and forest[x-2][y+1] == 0 and forest[x-1][y+2] == 0):
         return True
     else:
@@ -26,7 +26,7 @@ def check_move_w(x, y):
 def check_move_e(x, y):
     if (x+2 >= C and y+2<R):
         return False
-    elif (forest[x+1][y] == 0 and forest[x+2][y] == 0 and forest[x+1][y+1] == 0
+    elif (forest[x+1][y-1] == 0 and forest[x+2][y] == 0 and forest[x+1][y+1] == 0
     and forest[x+2][y+1] == 0 and forest[x+1][y+2] == 0):
         return True
     else:
@@ -81,6 +81,7 @@ def get_row(idx, x, y):
                 if (pv < 0):
                     if (forest_copy[nx][ny] != 0):
                         que.appendleft([nx, ny, forest_copy[nx][ny]])
+    print(idx+1, result)
     return result
 
             
