@@ -6,7 +6,7 @@ R, C, K = map(int, input().split())
 forest = [[0]*R for _ in range(C)]
 golem_dir = [0 for _ in range(K)]
 
-def check_move_s(x, y):
+def check_move_s(idx, x, y):
     if (y+2 >= R):
         return False
     elif (forest[x-1][y+1] == 0 and forest[x+1][y+1] == 0 and forest[x][y+2] == 0):
@@ -14,37 +14,51 @@ def check_move_s(x, y):
     else:
         return False
 
-def check_move_w(x, y):
+def check_move_w(idx, x, y):
     if (x-2 < 0 or y+2>=R):
         return False
-    elif (forest[x-1][y-1] == 0 and forest[x-2][y] == 0 and forest[x-1][y+1] == 0
-    and forest[x-2][y+1] == 0 and forest[x-1][y+2] == 0):
-        return True
+    if (y == -1):
+        if (forest[x-1][y+1] == 0 and forest[x-2][y+1] == 0 and forest[x-1][y+2] == 0):
+            return True
+    elif (y == 0):
+        if (forest[x-2][y] == 0 and forest[x-1][y+1] == 0 and forest[x-2][y+1] == 0 and forest[x-1][y+2] == 0):
+            return True
     else:
-        return False
+        if (forest[x-1][y-1] == 0 and forest[x-2][y] == 0 and forest[x-1][y+1] == 0
+        and forest[x-2][y+1] == 0 and forest[x-1][y+2] == 0):
+            return True
 
-def check_move_e(x, y):
+    return False
+
+def check_move_e(idx, x, y):
     if (x+2 >= C and y+2<R):
         return False
-    elif (forest[x+1][y-1] == 0 and forest[x+2][y] == 0 and forest[x+1][y+1] == 0
-    and forest[x+2][y+1] == 0 and forest[x+1][y+2] == 0):
-        return True
+    if (y == -1):
+        if (forest[x+1][y+1] == 0 and forest[x+2][y+1] == 0 and forest[x+1][y+2] == 0):
+            return True
+    elif (y == 0):
+        if (forest[x+2][y] == 0 and forest[x+1][y+1] == 0 and forest[x+2][y+1] == 0 and forest[x+1][y+2] == 0):
+            return True
     else:
-        return False
+        if (forest[x+1][y-1] == 0 and forest[x+2][y] == 0 and forest[x+1][y+1] == 0
+        and forest[x+2][y+1] == 0 and forest[x+1][y+2] == 0):
+            return True
+
+    return False
 
 
 def check_move(idx, start_x, start_y):
     if start_y+2 == R:
         return [start_x, start_y]
-    if check_move_s(start_x, start_y):
+    if check_move_s(idx, start_x, start_y):
         x, y = check_move(idx, start_x, start_y+1)
-    elif check_move_w(start_x, start_y):
+    elif check_move_w(idx, start_x, start_y):
         if (golem_dir[idx] == 0):
             golem_dir[idx] = 3
         else:
             golem_dir[idx] -= 1
         x, y = check_move(idx, start_x-1, start_y+1)
-    elif check_move_e(start_x, start_y):
+    elif check_move_e(idx, start_x, start_y):
         if (golem_dir[idx] == 3):
             golem_dir[idx] = 0
         else:
