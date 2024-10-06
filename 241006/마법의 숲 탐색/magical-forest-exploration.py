@@ -89,6 +89,7 @@ def get_row(idx, x, y):
 
     que.appendleft([x, y, forest[x][y]])
 
+    
     while que:
         px, py, pv = que.pop()
         visited[px][py] = 1
@@ -98,13 +99,16 @@ def get_row(idx, x, y):
         for i in range(4):
             nx = px + dx[i]
             ny = py + dy[i]
-            if (0 <= nx < C and 0 <= ny < R and visited[nx][ny] != 1):
+            if (0 <= nx < C and 0 <= ny < R and visited[nx][ny] != 1 and forest[nx][ny] != 0):
                 if (pv > 0):
                     if (forest[nx][ny] == pv or forest[nx][ny] == pv * -1):
+                        visited[nx][ny] = 1
                         que.appendleft([nx, ny, forest[nx][ny]])
                 if (pv < 0):
                     if (forest[nx][ny] != 0):
+                        visited[nx][ny] = 1
                         que.appendleft([nx, ny, forest[nx][ny]])
+    
     return result
 
             
