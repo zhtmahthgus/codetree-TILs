@@ -80,30 +80,31 @@ def check_move(idx, start_x, start_y):
 
 def get_row(idx, x, y):
     #dfs
-    forest_copy = [i[:]for i in forest]
     que = deque()
+    visited = []
     result = -1
 
     dx = [0, 1, 0, -1]
     dy = [-1, 0, 1, 0]
 
-    que.appendleft([x, y, forest_copy[x][y]])
+    que.appendleft([x, y, forest[x][y]])
 
     while que:
         px, py, pv = que.pop()
-        forest_copy[px][py] = 0
+        visited.append([px, py])
+
         if result < py :
             result = py
         for i in range(4):
             nx = px + dx[i]
             ny = py + dy[i]
-            if (0 <= nx < C and 0 <= ny < R):
+            if (0 <= nx < C and 0 <= ny < R and [nx, ny] not in visited):
                 if (pv > 0):
-                    if (forest_copy[nx][ny] == pv or forest_copy[nx][ny] == pv * -1):
-                        que.appendleft([nx, ny, forest_copy[nx][ny]])
+                    if (forest[nx][ny] == pv or forest[nx][ny] == pv * -1):
+                        que.appendleft([nx, ny, forest[nx][ny]])
                 if (pv < 0):
-                    if (forest_copy[nx][ny] != 0):
-                        que.appendleft([nx, ny, forest_copy[nx][ny]])
+                    if (forest[nx][ny] != 0):
+                        que.appendleft([nx, ny, forest[nx][ny]])
     return result
 
             
