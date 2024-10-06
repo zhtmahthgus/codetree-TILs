@@ -80,7 +80,7 @@ def check_move(idx, start_x, start_y):
 
 def get_row(idx, x, y):
     #dfs
-    forest_copy = copy.deepcopy(forest)
+    forest_copy = [i[:]for i in forest]
     que = deque()
     result = -1
 
