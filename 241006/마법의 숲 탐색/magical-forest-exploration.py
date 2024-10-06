@@ -9,15 +9,21 @@ golem_dir = [0 for _ in range(K)]
 def check_move_s(idx, x, y):
     if (y+2 >= R):
         return False
+    if (y == -2):
+        if (forest[x][y+2] == 0):
+            return True
     elif (forest[x-1][y+1] == 0 and forest[x+1][y+1] == 0 and forest[x][y+2] == 0):
         return True
-    else:
-        return False
+    
+    return False
 
 def check_move_w(idx, x, y):
     if (x-2 < 0 or y+2>=R):
         return False
-    if (y == -1):
+    if (y == -2):
+        if (forest[x-2][y+1] == 0 and forest[x-1][y+2] == 0):
+            return True
+    elif (y == -1):
         if (forest[x-1][y+1] == 0 and forest[x-2][y+1] == 0 and forest[x-1][y+2] == 0):
             return True
     elif (y == 0):
@@ -33,7 +39,10 @@ def check_move_w(idx, x, y):
 def check_move_e(idx, x, y):
     if (x+2 >= C and y+2<R):
         return False
-    if (y == -1):
+    if (y == -2):
+        if (forest[x+2][y+1] == 0 and forest[x+1][y+2] == 0):
+            return True
+    elif (y == -1):
         if (forest[x+1][y+1] == 0 and forest[x+2][y+1] == 0 and forest[x+1][y+2] == 0):
             return True
     elif (y == 0):
@@ -104,7 +113,7 @@ def get_row(idx, x, y):
 
 def move_g(idx, start_x):
     global forest
-    x, y = check_move(idx, start_x-1, -1)
+    x, y = check_move(idx, start_x-1, -2)
     if (y < 1) :
         forest = [[0]*R for _ in range(C)]
         return 0
