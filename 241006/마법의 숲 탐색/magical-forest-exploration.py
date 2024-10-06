@@ -81,7 +81,7 @@ def check_move(idx, start_x, start_y):
 def get_row(idx, x, y):
     #dfs
     que = deque()
-    visited = []
+    visited =  [[0]*R for _ in range(C)]
     result = -1
 
     dx = [0, 1, 0, -1]
@@ -91,14 +91,14 @@ def get_row(idx, x, y):
 
     while que:
         px, py, pv = que.pop()
-        visited.append([px, py])
+        visited[px][py] = 1
 
         if result < py :
             result = py
         for i in range(4):
             nx = px + dx[i]
             ny = py + dy[i]
-            if (0 <= nx < C and 0 <= ny < R and [nx, ny] not in visited):
+            if (0 <= nx < C and 0 <= ny < R and visited[nx][ny] != 1):
                 if (pv > 0):
                     if (forest[nx][ny] == pv or forest[nx][ny] == pv * -1):
                         que.appendleft([nx, ny, forest[nx][ny]])
