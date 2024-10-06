@@ -81,7 +81,6 @@ def get_row(idx, x, y):
                 if (pv < 0):
                     if (forest_copy[nx][ny] != 0):
                         que.appendleft([nx, ny, forest_copy[nx][ny]])
-    print(idx+1, result)
     return result
 
             
