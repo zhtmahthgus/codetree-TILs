@@ -21,7 +21,7 @@ def check_move_w(idx, x, y):
     if (x-2 < 0 or y+2>=R):
         return False
     if (y == -2):
-        if (forest[x-2][y+1] == 0 and forest[x-1][y+2] == 0):
+        if (forest[x-1][y+2] == 0):
             return True
     elif (y == -1):
         if (forest[x-1][y+1] == 0 and forest[x-2][y+1] == 0 and forest[x-1][y+2] == 0):
@@ -40,7 +40,7 @@ def check_move_e(idx, x, y):
     if (x+2 >= C and y+2<R):
         return False
     if (y == -2):
-        if (forest[x+2][y+1] == 0 and forest[x+1][y+2] == 0):
+        if (forest[x+1][y+2] == 0):
             return True
     elif (y == -1):
         if (forest[x+1][y+1] == 0 and forest[x+2][y+1] == 0 and forest[x+1][y+2] == 0):
