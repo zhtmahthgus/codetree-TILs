@@ -90,7 +90,7 @@ def get_row(idx, x, y):
 
 def move_g(idx, start_x):
     global forest
-    x, y = check_move(idx, start_x-1, -2)
+    x, y = check_move(idx, start_x-1, -1)
     if (y < 1) :
         forest = [[0]*R for _ in range(C)]
         return 0
