@@ -56,8 +56,9 @@ def countChat(idx):
     while que:
         child_idx, child_depth = que.pop()
         child_chat = chat_list[child_idx]
+        #print(idx, child_idx)
         if (child_chat.alarm == False):
-            return cnt
+            continue
         if (child_depth <= child_chat.auth):
             cnt += 1
         for c in child_chat.child:
